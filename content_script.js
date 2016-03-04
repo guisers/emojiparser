@@ -1,6 +1,6 @@
 document.addEventListener("input", watchAll, true);
 
-var regex = /(^|\s+):[a-z|_]+:?$/;
+var regex = /(^|\s+):[a-z|_|\d]+:?$/;
 
 function watchAll(e) {
 	// content-editable div
