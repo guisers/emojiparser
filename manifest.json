@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+
+  "name": "Emoji Parser",
+  "description": "Input emojis using the universal shortcodes anywhere in your browser",
+  "version": "1.0",
+
+  // "browser_action": {
+  //   "default_popup": "popup.html",
+  //   "default_title": "Map It!",
+  //   "default_icon": "icon.png"
+  // },
+  // "content_security_policy": "script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; object-src 'self'",
+  // "permissions": [
+  //   "tabs",
+  //   "http://*/*", 
+  //   "https://*/*"
+  // ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content_script.js"]
+    }
+  ]
+}
