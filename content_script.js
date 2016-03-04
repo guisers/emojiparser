@@ -1,6 +1,6 @@
 document.addEventListener("input", watchAll, true);
 
-var regex = /(^|\s+):[a-z|_|\d]+:?$/;
+var regex = /(^|\s+):[a-z|_|\d|-]+:?$/;
 
 function watchAll(e) {
 	// content-editable div
@@ -917,7 +917,12 @@ var emojiMap = {
    ":yellow_heart:":"\u{1F49B}",
    ":yen:":"\u{1F4B4}",
    ":yum:":"\u{1F60B}",
-   ":zap:":"\u{026A1}"
+   ":zap:":"\u{026A1}",
+   ":skin-tone-2:":"\u{1F3FB}",
+   ":skin-tone-3:":"\u{1F3FC}",
+   ":skin-tone-4:":"\u{1F3FD}",
+   ":skin-tone-5:":"\u{1F3FE}",
+   ":skin-tone-6:":"\u{1F3FF}"
 }
 
 var emojiKeys = Object.keys(emojiMap);
