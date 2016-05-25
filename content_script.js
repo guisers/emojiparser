@@ -6,15 +6,7 @@ xhr.onreadystatechange = function() {
       if (xhr.status === 200) {
          var result = JSON.parse(xhr.responseText);
          for (var i=0; i<result.length; i++) {
-            var code;
-            if (result[i].unified.length == 11) {
-               var surrogateA = result[i].unified.slice(0,5);
-               var surrogateB = result[i].unified.slice(6,11);
-               code = String.fromCodePoint(parseInt(surrogateA,16)) + String.fromCodePoint(parseInt(surrogateB,16));
-            } else {
-               code = String.fromCodePoint(parseInt(result[i].unified,16));  
-            }
-            emojiMap[result[i].short_name] = code;
+            emojiMap[result[i].short_name] = _getUnicodeFromString(result[i].unified);
          }
          emojiKeys = Object.keys(emojiMap);
       } else {
@@ -28,6 +20,17 @@ xhr.onreadystatechange = function() {
 document.addEventListener("input", watchAll, true);
 
 var regex = /(^|\s+):([a-z|_|\d|\-|\+]+):?$/;
+
+function _getUnicodeFromString(str) {
+   if (str.length == 11) { // Handle flags and other unicode pairs
+      var surrogateA = str.slice(0,5);
+      var surrogateB = str.slice(6,11);
+      code = String.fromCodePoint(parseInt(surrogateA,16)) + String.fromCodePoint(parseInt(surrogateB,16));
+   } else {
+      code = String.fromCodePoint(parseInt(str,16));  
+   }
+   return code;
+}
 
 function watchAll(e) {
 	// content-editable div
