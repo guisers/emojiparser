@@ -6,7 +6,15 @@ xhr.onreadystatechange = function() {
       if (xhr.status === 200) {
          var result = JSON.parse(xhr.responseText);
          for (var i=0; i<result.length; i++) {
-            emojiMap[result[i].short_name] = String.fromCodePoint(parseInt(result[i].unified,16));
+            var code;
+            if (result[i].unified.length == 11) {
+               var surrogateA = result[i].unified.slice(0,5);
+               var surrogateB = result[i].unified.slice(6,11);
+               code = String.fromCodePoint(parseInt(surrogateA,16)) + String.fromCodePoint(parseInt(surrogateB,16));
+            } else {
+               code = String.fromCodePoint(parseInt(result[i].unified,16));  
+            }
+            emojiMap[result[i].short_name] = code;
          }
          emojiKeys = Object.keys(emojiMap);
       } else {
