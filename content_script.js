@@ -32,6 +32,19 @@ function _getUnicodeFromString(str) {
    return code;
 }
 
+
+function _handleSkinVariations(emoji) {
+   var i=1;
+   for (var variation in emoji.skin_variations) {
+      if (!emoji.skin_variations.hasOwnProperty(variation)) {
+         //The current property is not a direct property of p
+         continue;
+      }
+      emojiMap[`${emoji.short_name}-${i}`] = _getUnicodeFromString(variation);
+      i++;
+   }
+}
+
 function watchAll(e) {
 	// content-editable div
 	var fullInput = window.getSelection().focusNode.data;
