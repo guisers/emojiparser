@@ -112,8 +112,6 @@ function _getCursorPos(event) {
    } else return window.getSelection().focusOffset; // content-editable div
 }
 
-
-
 function watchAll(e) {
 	var fullInput = _getInputString(e);
 	var cursor = _getCursorPos(e);
