@@ -45,6 +45,17 @@ function _handleSkinVariations(emoji) {
    }
 }
 
+function _getOrCreateTooltip(title) {
+   var tooltip = document.getElementById(title);
+   if (!tooltip) { 
+      tooltip = document.createElement('div');
+      tooltip.id = title;
+      tooltip.style.cssText = "position: fixed;bottom: 0px;right: 0px;z-index: 1000;white-space: pre;background-color: rgba(255, 255, 255, 0.9);font-family: 'Gill Sans MT', Arial;font-size: 16px;color: #303030;padding: 10px;border: solid 1px #aaa;max-height:350px;overflow:scroll;";
+      document.body.appendChild(tooltip);
+   }
+   return tooltip;
+}
+
 function watchAll(e) {
 	// content-editable div
 	var fullInput = window.getSelection().focusNode.data;
@@ -56,13 +67,7 @@ function watchAll(e) {
 	if (!fullInput) return; 
 	inputBeforeCursor = fullInput.slice(0, cursor);
 
-	var tooltip = document.getElementById("emojiParserTooltip");
-	if (!tooltip) { // create tooltip if haven't yet
-		tooltip = document.createElement('div');
-		tooltip.id = "emojiParserTooltip";
-		tooltip.style.cssText = "position: fixed;bottom: 0px;right: 0px;z-index: 1000;white-space: pre;background-color: rgba(255, 255, 255, 0.9);font-family: 'Gill Sans MT', Arial;font-size: 16px;color: #303030;padding: 10px;border: solid 1px #aaa;max-height:350px;overflow:scroll;";
-		document.body.appendChild(tooltip);
-	}
+	var tooltip = _getOrCreateTooltip("emojiParserTooltip"); 
 
 	tooltip.textContent = "";
 	tooltip.style.display = "none";
