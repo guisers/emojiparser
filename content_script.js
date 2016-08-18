@@ -1,9 +1,20 @@
 // GLOBAL VARS
-var emojiMap = {};
-var emojiKeys = [];
+var emojiMap;
+var emojiKeys;
 
 function init() {
    document.addEventListener("input", watchAll, true);
+
+   emojiMap = JSON.parse(window.localStorage.getItem('emojiMap'));
+   emojiKeys = JSON.parse(window.localStorage.getItem('emojiKeys'));
+
+   if (emojiMap && emojiKeys) {
+      console.log('EmojiParser: Fetching emojis from local storage');
+      return;
+   }
+
+   emojiMap = {};
+   emojiKeys = [];
 
    var xhr = new XMLHttpRequest();
    xhr.onreadystatechange = function() {
@@ -14,8 +25,11 @@ function init() {
                emojiMap[result[i].short_name] = _getUnicodeFromString(result[i].unified);
             }
             emojiKeys = Object.keys(emojiMap);
+            console.log('EmojiParser: Caching emojis to local storage');
+            window.localStorage.setItem('emojiMap', JSON.stringify(emojiMap));
+            window.localStorage.setItem('emojiKeys', JSON.stringify(emojiKeys));
          } else {
-            console.log("Emoji parser failed to parse emoji data from source");
+            console.log('EmojiParser: Failed to retrieve emoji data from source');
          }
       }
    };
