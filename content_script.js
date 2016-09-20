@@ -9,7 +9,6 @@ function init() {
    emojiKeys = JSON.parse(window.localStorage.getItem('emojiKeys'));
 
    if (emojiMap && emojiKeys) {
-      console.log('EmojiParser: Fetching emojis from local storage');
       return;
    }
 
@@ -25,7 +24,6 @@ function init() {
                emojiMap[result[i].short_name] = _getUnicodeFromString(result[i].unified);
             }
             emojiKeys = Object.keys(emojiMap);
-            console.log('EmojiParser: Caching emojis to local storage');
             window.localStorage.setItem('emojiMap', JSON.stringify(emojiMap));
             window.localStorage.setItem('emojiKeys', JSON.stringify(emojiKeys));
          } else {

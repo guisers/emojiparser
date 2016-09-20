@@ -9,6 +9,7 @@ Currently, this has been tested on Facebook chat, Whatsapp Web, Gmail (as well a
 ## What's changed?
 ### 1.0.1 (2016-05-25)
 #### Added
+* Cache emoji data to `window.localStorage` instead of ajaxing every time
 * Support for flag emojis
 * Created .gitignore
 
