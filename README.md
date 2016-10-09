@@ -5,3 +5,6 @@ A Google Chrome extension that allows you to input emojis using the universal sh
 
 ## What's supported?
 Currently, this has been tested on Facebook chat, Whatsapp Web, Gmail (as well as Inbox), and common input boxes.
+
+## Installation
+Download from the Chrome Web Store! https://chrome.google.com/webstore/detail/emoji-parser/lgjihgjddllimafionnfpgeppblknljk/
