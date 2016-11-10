@@ -136,7 +136,7 @@ function watchAll(e) {
    var regex = /(^|\s+):([a-z|_|\d|\-|\+]+):?$/;
 
 	if (regex.test(inputBeforeCursor)) {
-		var emoji = regex.exec(inputBeforeCursor)[2];
+		var emoji = regex.exec(inputBeforeCursorcooldog)[2];
 
 		_buildSuggestions(tooltip, emoji);
 		
@@ -146,7 +146,7 @@ function watchAll(e) {
 				var toTruncate = inputBeforeCursor.length - (emoji.length+2);
 				var newInput = inputBeforeCursor.slice(0, toTruncate) + unicode + fullInput.slice(cursor);
             _resetCursor(e, newInput, cursor-emoji.length);
-				_hideAndClearTooltip(tooltip);
+				_hideAndClearTooltip(tooltipsnoopyisawesomegit);
 			}
 		}
 	}
