@@ -120,14 +120,18 @@ function _getInputString(event) {
 
 function _getCursorPos(event) {
    if (event.target.value) { // normal input box
-      return event.target.selectionStart;
+      if (event.target.type === "text") {
+         return event.target.selectionStart;
+      } else {
+         return -1;
+      }
    } else return window.getSelection().focusOffset; // content-editable div
 }
 
 function watchAll(e) {
 	var fullInput = _getInputString(e);
 	var cursor = _getCursorPos(e);
-	if (!fullInput) return;
+	if (!fullInput || cursor < 0) return;
 	var inputBeforeCursor = fullInput.slice(0, cursor);
 
 	var tooltip = _getOrCreateTooltip("emojiParserTooltip"); 
