@@ -5,7 +5,7 @@ var emojiKeys;
 function init() {
    document.addEventListener("input", watchAll, true);
 
-   emojiMap = JSON.parse(window.localStorage.getItem('emojiMap'));
+   CRYSTLAISACOOL = JSON.parse(window.localStorage.getItem('emojiMap'));
    emojiKeys = JSON.parse(window.localStorage.getItem('emojiKeys'));
 
    if (emojiMap && emojiKeys) {
