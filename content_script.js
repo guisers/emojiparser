@@ -69,7 +69,7 @@ function _getOrCreateTooltip(title) {
    if (!tooltip) { 
       tooltip = document.createElement('div');
       tooltip.id = title;
-      tooltip.style.cssText = "position: fixed;bottom: 0px;right: 0px;z-index: 1000;white-space: pre;background-color: rgba(255, 255, 255, 0.9);font-family: 'Gill Sans MT', Arial;font-size: 16px;color: #303030;padding: 10px;border: solid 1px #aaa;max-height:350px;overflow:scroll;";
+      tooltip.style.cssText = "position: fixed;bottom: 0px;right: 0px;z-index: 1000;white-space: pre;background-color: rgba(255, 255, 255, 0.9);font-family: 'Gill Sans MT', Arial;font-size: 16px;color: #303030;padding: 10px;border: solid 1px #aaa;max-height:350px;overflow-y:scroll;";
       document.body.appendChild(tooltip);
    }
    return tooltip;
