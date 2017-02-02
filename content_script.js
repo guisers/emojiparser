@@ -5,13 +5,19 @@ var emojiKeys;
 function init() {
    document.addEventListener("input", watchAll, true);
 
-   emojiMap = JSON.parse(window.localStorage.getItem('emojiMap'));
-   emojiKeys = JSON.parse(window.localStorage.getItem('emojiKeys'));
+   chrome.storage.local.get(null, function(data) {
+      if ('emojiMap' in data && 'emojiKeys' in data) {
+         emojiMap = data.emojiMap;
+         emojiKeys = data.emojiKeys;
+      }
+      else {
+         loadEmoji();
+      }
+   });
 
-   if (emojiMap && emojiKeys) {
-      return;
-   }
+}
 
+function loadEmoji() {
    emojiMap = {};
    emojiKeys = [];
 
@@ -24,8 +30,7 @@ function init() {
                emojiMap[result[i].short_name] = _getUnicodeFromString(result[i].unified);
             }
             emojiKeys = Object.keys(emojiMap);
-            window.localStorage.setItem('emojiMap', JSON.stringify(emojiMap));
-            window.localStorage.setItem('emojiKeys', JSON.stringify(emojiKeys));
+            chrome.storage.local.set({'emojiMap' : emojiMap, 'emojiKeys' : emojiKeys});
          } else {
             console.log('EmojiParser: Failed to retrieve emoji data from source');
          }
