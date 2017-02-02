@@ -5,13 +5,19 @@ var emojiKeys;
 function init() {
    document.addEventListener("input", watchAll, true);
 
-   emojiMap = JSON.parse(window.localStorage.getItem('emojiMap'));
-   emojiKeys = JSON.parse(window.localStorage.getItem('emojiKeys'));
+   chrome.storage.local.get(null, function(data) {
+      if ('emojiMap' in data && 'emojiKeys' in data) {
+         emojiMap = data.emojiMap;
+         emojiKeys = data.emojiKeys;
+      }
+      else {
+         loadEmoji();
+      }
+   });
 
-   if (emojiMap && emojiKeys) {
-      return;
-   }
+}
 
+function loadEmoji() {
    emojiMap = {};
    emojiKeys = [];
 
@@ -24,8 +30,7 @@ function init() {
                emojiMap[result[i].short_name] = _getUnicodeFromString(result[i].unified);
             }
             emojiKeys = Object.keys(emojiMap);
-            window.localStorage.setItem('emojiMap', JSON.stringify(emojiMap));
-            window.localStorage.setItem('emojiKeys', JSON.stringify(emojiKeys));
+            chrome.storage.local.set({'emojiMap' : emojiMap, 'emojiKeys' : emojiKeys});
          } else {
             console.log('EmojiParser: Failed to retrieve emoji data from source');
          }
@@ -64,7 +69,7 @@ function _getOrCreateTooltip(title) {
    if (!tooltip) { 
       tooltip = document.createElement('div');
       tooltip.id = title;
-      tooltip.style.cssText = "position: fixed;bottom: 0px;right: 0px;z-index: 1000;white-space: pre;background-color: rgba(255, 255, 255, 0.9);font-family: 'Gill Sans MT', Arial;font-size: 16px;color: #303030;padding: 10px;border: solid 1px #aaa;max-height:350px;overflow:scroll;";
+      tooltip.style.cssText = "position: fixed;bottom: 0px;right: 0px;z-index: 1000;white-space: pre;background-color: rgba(255, 255, 255, 0.9);font-family: 'Gill Sans MT', Arial;font-size: 16px;color: #303030;padding: 10px;border: solid 1px #aaa;max-height:350px;overflow-y:scroll;";
       document.body.appendChild(tooltip);
    }
    return tooltip;
